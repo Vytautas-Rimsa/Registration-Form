@@ -1,0 +1,66 @@
+<!DOCTYPE HTML> 
+  <html>
+  <head>
+	<meta charset="UTF-8"
+    <title></title>
+	<script>
+		function validateVardas(field){
+			if (field=="") return "Name was not entered.\n"
+			return""
+		}
+		function validatePavarde(field){
+			if (field=="") return "Surname was not entered.\n"
+			return""
+		}
+		function validateVartotojo_vardas(field){
+			if (field=="") return "Nickname was not entered.\n"
+			else if (field.length<5) return "Nickname must be at least 5 symbol length.\n"
+			else if (/[^a-zA-Z0-9_-]/.test(field)) return "Nickname can only consist of letters, numbers and symbol _.\n"
+			return""
+		}
+		function validateSlpatazodis(field){
+			if (field=="") return"Password was not entered.\n"
+			else if(field.length<6) return "Password must be at least 6 symbol length.\n"
+			else if (/[^a-zA-Z0-9]/.test(field)) return "Password can only consist of letters and numbers.\n"
+			return""
+		}
+		function validateAmzius(field){
+			if (isNaN(field)) return"Age was not entered.\n"
+			else if(field<18 || field>110) return "Age must be between 18 and 110 years.\n"
+			return""
+		}
+		function validatePastas(field){
+			if (field=="") return"E-mail was not entered.\n"
+			else if(!((field.indexOf(".")>0)&&(field.indexOf("@")>0))||/[^a-zA-Z0-9.@_-]/.test(field)) return "E-mail address is not valid.\n"
+			return""
+		}
+		function validate(form){
+			fail = validateVardas(form.vardas.value)
+			fail += validatePavarde(form.pavarde.value)
+			fail += validateVartotojo_vardas(form.vartotojo_vardas.value)
+			fail += validateSlpatazodis(form.slaptazodis.value)
+			fail += validateAmzius(form.amzius.value)
+			fail += validatePastas(form.email.value)
+			if (fail =="") return true
+			else {
+				alert(fail);
+				return false
+			}
+		}	
+	</script>	
+  </head>
+  <body> 
+    <table class="signup" border="0" cellpadding="2" cellspacing="5" bgcolor="#eeeeee">
+		<th colspan="2" align="center">Registration Form</th>
+			<form method="post" onSubmit="return validate(this)">
+				<tr><td>Name</td><td><input type="text" maxlength="32" name="vardas"/></td></tr>
+				<tr><td>Surname</td><td><input type="text" maxlength="32" name="pavarde"/></td></tr>
+				<tr><td>Nickname</td><td><input type="text" maxlength="16" name="vartotojo_vardas"/><td></tr>
+				<tr><td>Password</td><td><input type="text" maxlength="12" name="slaptazodis"/></td></tr>
+				<tr><td>Age</td><td><input type="text" maxlength="3" name="amzius"/></td></tr>
+				<tr><td>E-mail</td><td><input type="text" maxlength="64" name="email"/></td></tr>
+				<tr><td colspan="2" align="center"> <input type="submit" value="Submit" onclick="validate()"/></td></tr>
+			</form>
+	</table>		
+   </body>
+   </html>
